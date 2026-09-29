@@ -1,33 +1,43 @@
 model_context_window = 272000
 model_auto_compact_token_limit = 200000
-model = "gpt-5.6-luna"
+model = "gpt-6-luna"
 personality = "pragmatic"
-approval_policy = "on-request"
+approval_policy = "never"
 approvals_reviewer = "user"
-sandbox_mode = "workspace-write"
+sandbox_mode = "danger-full-access"
 file_opener = "vscode"
-network_access = "enabled"
 model_reasoning_effort = "max"
-service_tier = "default"
+service_tier = "priority"
 
 notify = ["/Users/r2/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended", "--previous-notify", "[\"\\/bin\\/sh\",\"-c\",\"exec \\\"$HOME\\/.codex\\/computer-use\\/Codex Computer Use.app\\/Contents\\/SharedSupport\\/SkyComputerUseClient.app\\/Contents\\/MacOS\\/SkyComputerUseClient\\\" turn-ended \\\"$@\\\"\",\"codex-notify\"]"]
 
 [agents]
 enabled = true
 max_depth = 2
-default_subagent_model = "gpt-5.6-luna"
+default_subagent_model = "gpt-6-luna"
 default_subagent_reasoning_effort = "medium"
 max_concurrent_threads_per_session = 4
 
 [desktop]
-selected-avatar-id = "custom:mister-kind"
+selected-avatar-id = "fireball"
 preventSleepWhileRunning = true
 show-context-window-usage = true
 composerEnterBehavior = "cmdIfMultiline"
 dictationDictionary = []
 git-branch-prefix = "feature/"
 git-show-sidebar-pr-icons = true
-git-pr-instructions = "write it in english \n\nfollow this pattern \n\n## Summary \n\n## Details\n\nCloses : [tickets number] (when it's available)"
+git-pr-instructions = """
+write it in english 
+
+follow this pattern 
+
+## Summary 
+
+## Details
+
+Closes : [tickets number] (when it's available)
+
+DO NOT add "Validations" section """
 git-commit-instructions = "follow conventional commit"
 followUpQueueMode = "queue"
 dock-icon-preference = "codex-system"
@@ -41,14 +51,33 @@ worktree-upstream-refresh-mode = "never"
 projectlessWorkspaceRoot = "/Users/r2/Developer/Codex"
 toys-confetti-enabled = true
 keepRemoteControlAwakeWhilePluggedIn = true
+appearanceDiffMarkerStyle = "color"
+usePointerCursors = true
+appearanceLightCodeThemeId = "vercel"
 
 [desktop.open-in-target-preferences]
 global = "ghostty"
 
+[desktop.appearanceLightChromeTheme]
+accent = "#006aff"
+accentSource = "custom"
+contrast = 40
+ink = "#171717"
+opaqueWindows = true
+surface = "#ffffff"
+
+[desktop.appearanceLightChromeTheme.fonts]
+code = '"Geist Mono", ui-monospace, "SFMono-Regular"'
+ui = "Geist, Inter"
+
+[desktop.appearanceLightChromeTheme.semanticColors]
+diffAdded = "#28A948"
+diffRemoved = "#EB001D"
+skill = "#A100F8"
+
 [features]
 goals = true
 unified_exec = true
-child_agents_md = true
 multi_agent = true
 plugins = true
 plugin_hooks = true
@@ -106,6 +135,11 @@ source = "/Users/r2/.codex/.tmp/bundled-marketplaces/openai-bundled"
 source_type = "local"
 source = "/Users/r2/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
 
+[marketplaces.i-have-adhd]
+source_type = "git"
+source = "https://github.com/ayghri/i-have-adhd.git"
+ref = "main"
+
 [mcp_servers.semble]
 command = "uvx"
 args = ["--from", "semble[mcp]==0.5.5", "semble"]
@@ -143,18 +177,16 @@ BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
 BROWSER_USE_TINYSKY_ENABLED = "1"
 NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = ""
 NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = ""
-NODE_REPL_INSTRUCTIONS_USE_CASE_COMPUTER_USE = ""
 BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
-BROWSER_USE_CODEX_APP_VERSION = "26.901.51231"
-NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/r2/.codex/plugins/cache/openai-bundled/browser/26.901.51231/scripts/browser-service.mjs","sky":"@oai/sky/service"}'
-SKY_CUA_SERVICE_PATH = "/Users/r2/.codex/computer-use/Codex Computer Use.app"
-CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex"
+BROWSER_USE_CODEX_APP_VERSION = "26.924.22138"
+NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/r2/.codex/plugins/cache/openai-bundled/browser/26.924.22138/scripts/browser-service.mjs"}'
+CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex"
 
 [mcp_servers.playwright]
 command = "npx"
 args = ["@playwright/mcp@latest"]
-startup_timeout_sec = 15.0
 enabled = false
+startup_timeout_sec = 15.0
 
 [mcp_servers.notion]
 url = "https://mcp.notion.com/mcp"
@@ -168,6 +200,21 @@ enabled = false
 [mcp_servers.XcodeBuildMCP]
 command = "xcodebuildmcp"
 args = ["mcp"]
+enabled = false
+
+# The bundled Codex MCP decoder rejects trvl's valid resource_link and fractional annotation blocks.
+[mcp_servers.trvl]
+command = "/opt/homebrew/bin/python3"
+args = ["/Users/r2/Developer/github/skills/flight-search/scripts/trvl-codex-bridge.py"]
+# trvl's live search can take just over Codex's 30-second default.
+tool_timeout_sec = 120
+enabled = false
+
+[mcp_servers.trvl.tools.travel]
+approval_mode = "approve"
+
+[mcp_servers.octotrip-flights]
+url = "https://mcp.octotrip.app/flights/mcp"
 enabled = false
 
 # Plugins
@@ -214,13 +261,10 @@ enabled = true
 [plugins."codex-app-tools@openai-bundled"]
 enabled = true
 
-[plugins."sites@openai-bundled"]
-enabled = true
-
 [plugins."unified-computer-use@openai-bundled"]
 enabled = true
 
-[plugins."computer-use@openai-bundled"]
+[plugins."i-have-adhd@i-have-adhd"]
 enabled = true
 
 [shell_environment_policy.set]
@@ -257,6 +301,27 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [projects."/Users/r2/Developer/Codex/2026-09-08/qui"]
+trust_level = "trusted"
+
+[projects."/Users/r2/.codex/.chatgpt-projects/g-p-69e4ec39992c81918fa59534b563da28"]
+trust_level = "trusted"
+
+[projects."/Users/r2/Documents/ChatGPT/Thailand"]
+trust_level = "trusted"
+
+[projects."/Users/r2/Documents/Maison"]
+trust_level = "trusted"
+
+[projects."/Users/r2/KNP/weshop"]
+trust_level = "trusted"
+
+[projects."/Users/r2/Developer/Codex/2026-09-14/deepinit-users-r2-agents-skills-deepinit"]
+trust_level = "trusted"
+
+[projects."/Users/r2/Developer/Codex/2026-09-17/new-chat"]
+trust_level = "trusted"
+
+[projects."/Users/r2/Developer/career-ops"]
 trust_level = "trusted"
 
 [apps.asdk_app_69a1d78e929881919bba0dbda1f6436d]
@@ -363,3 +428,6 @@ trusted_hash = "sha256:9205c1763e40c0256ab334e2e96c037c1cdf5b8bfaddba31ed19d93d3
 
 [hooks.state."context-mode@context-mode:.codex-plugin/hooks.json:user_prompt_submit:0:0"]
 trusted_hash = "sha256:114549c484c131b94782d3424527dd1042d48bc3a8616a11299acdf60b112572"
+
+[hooks.state."i-have-adhd@i-have-adhd:hooks/hooks.json:session_start:0:0"]
+trusted_hash = "sha256:f14f820a4bb04f568faf482695f08471d7ed733a25fd94181693a7be4f06a637"

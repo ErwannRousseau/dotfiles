@@ -21,7 +21,7 @@ HIST_STAMPS="dd/mm/yyyy"
 plugins=(
   git git-flow
   pnpm yarn npm brew macos vscode
-  docker docker-compose multipass globalias
+  docker docker-compose globalias
   fzf-tab
   bun
 )
@@ -114,9 +114,6 @@ source "$HOMEBREW_PREFIX/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zs
 # zsh-vi-mode initializes lazily and otherwise replaces fzf's Ctrl-R binding.
 zvm_after_init_commands+=( "bindkey -M viins ^R fzf-history-widget" )
 
-# ------- starship prompt terminal -------
-eval "$(starship init zsh)"
-
 # ------- zsh-syntax-highlighting -------
 # Must be the LAST thing sourced
 source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" 2>/dev/null || true
@@ -147,3 +144,6 @@ if output="$(mole completion zsh 2>/dev/null)"; then eval "$output"; fi
 # Secrets
 
 [[ -r "$HOME/.secrets/slides.env" ]] && source "$HOME/.secrets/slides.env"
+
+# ------- starship prompt terminal -------
+eval "$(starship init zsh)"

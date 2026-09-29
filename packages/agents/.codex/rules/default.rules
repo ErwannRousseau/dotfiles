@@ -1,17 +1,35 @@
 prefix_rule(
     pattern = ["ssh"],
     decision = "forbidden",
-    justification = "Les commandes SSH sont interdites.",
+    justification = "SSH commands are forbidden.",
 )
 
 prefix_rule(
     pattern = ["scp"],
     decision = "forbidden",
-    justification = "Les commandes SCP sont interdites.",
+    justification = "SCP commands are forbidden.",
 )
 
 prefix_rule(
     pattern = ["sftp"],
     decision = "forbidden",
-    justification = "Les commandes SFTP sont interdites.",
+    justification = "SFTP commands are forbidden.",
+)
+
+prefix_rule(
+    pattern = ["rtk", "proxy", "ssh"],
+    decision = "forbidden",
+    justification = "RTK proxy SSH commands are forbidden.",
+)
+
+prefix_rule(
+    pattern = ["rtk", "proxy", "scp"],
+    decision = "forbidden",
+    justification = "RTK proxy SCP commands are forbidden.",
+)
+
+prefix_rule(
+    pattern = ["rtk", "proxy", "sftp"],
+    decision = "forbidden",
+    justification = "RTK proxy SFTP commands are forbidden.",
 )
