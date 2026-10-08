@@ -1,13 +1,13 @@
 model_context_window = 272000
 model_auto_compact_token_limit = 200000
-model = "gpt-6-luna"
+model = "gpt-6.1-sol"
 personality = "pragmatic"
 approval_policy = "never"
 approvals_reviewer = "user"
 sandbox_mode = "danger-full-access"
 file_opener = "vscode"
-model_reasoning_effort = "max"
-service_tier = "priority"
+model_reasoning_effort = "medium"
+service_tier = "default"
 
 notify = ["/Users/r2/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended", "--previous-notify", "[\"\\/bin\\/sh\",\"-c\",\"exec \\\"$HOME\\/.codex\\/computer-use\\/Codex Computer Use.app\\/Contents\\/SharedSupport\\/SkyComputerUseClient.app\\/Contents\\/MacOS\\/SkyComputerUseClient\\\" turn-ended \\\"$@\\\"\",\"codex-notify\"]"]
 
@@ -19,7 +19,7 @@ default_subagent_reasoning_effort = "medium"
 max_concurrent_threads_per_session = 4
 
 [desktop]
-selected-avatar-id = "fireball"
+selected-avatar-id = "pet_6ac4cdcfd76081918aa15ff2d0b29912"
 preventSleepWhileRunning = true
 show-context-window-usage = true
 composerEnterBehavior = "cmdIfMultiline"
@@ -54,6 +54,9 @@ keepRemoteControlAwakeWhilePluggedIn = true
 appearanceDiffMarkerStyle = "color"
 usePointerCursors = true
 appearanceLightCodeThemeId = "vercel"
+sidebar-show-projects-in-recents = false
+code-review-sidebar-layout = "detailed"
+code-review-sidebar-sections = ["waiting_for_review", "needs_my_review", "needs_my_teams_review", "merged"]
 
 [desktop.open-in-target-preferences]
 global = "ghostty"
@@ -173,13 +176,13 @@ NODE_REPL_NODE_MODULE_DIRS = "/Applications/ChatGPT.app/Contents/Resources/cua_n
 NODE_REPL_NODE_PATH = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node"
 NODE_REPL_TRUSTED_CODE_PATHS = "/Users/r2/.codex:/Applications/ChatGPT.app/Contents/Resources/cua_node/lib/node_modules"
 CODEX_HOME = "/Users/r2/.codex"
-BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
+BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab,mcpapps"
 BROWSER_USE_TINYSKY_ENABLED = "1"
 NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = ""
 NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = ""
 BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
-BROWSER_USE_CODEX_APP_VERSION = "26.924.22138"
-NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/r2/.codex/plugins/cache/openai-bundled/browser/26.924.22138/scripts/browser-service.mjs"}'
+BROWSER_USE_CODEX_APP_VERSION = "26.930.51102"
+NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/r2/.codex/plugins/cache/openai-bundled/browser/26.930.51102/scripts/browser-service.mjs"}'
 CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex"
 
 [mcp_servers.playwright]
@@ -267,6 +270,9 @@ enabled = true
 [plugins."i-have-adhd@i-have-adhd"]
 enabled = true
 
+[plugins."code-review@openai-bundled"]
+enabled = true
+
 [shell_environment_policy.set]
 NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "9230e2bd8b24b7ac7a0ba6774c64bf0d78ecdabbdd91d0ed627b02a587bae2df"
 
@@ -331,7 +337,7 @@ enabled = false
 enabled = false
 
 [apps.asdk_app_69ceae6d8d78819192e59f76b8e170b5]
-enabled = false
+enabled = true
 
 [apps.asdk_app_6a0faef988b48191b843bac5cd170a9e]
 enabled = false
@@ -403,13 +409,13 @@ path = "/Users/r2/.codex/.tmp/plugins/plugins/figma/skills/figma-use-motion/SKIL
 enabled = false
 
 [hooks.state."ponytail@ponytail:hooks/claude-codex-hooks.json:session_start:0:0"]
-trusted_hash = "sha256:5f81d38f47448a1581c08ec877e044d9e04dd6f814dce3f2671f7a8edadd719b"
+trusted_hash = "sha256:7ee5d5ae1f4a9e55f1f429f2960c2f9f32293f198c0e8e2e42b2fb3b4eeda142"
 
 [hooks.state."ponytail@ponytail:hooks/claude-codex-hooks.json:subagent_start:0:0"]
-trusted_hash = "sha256:1423b56c1322f96c8f74c51c1e7ae9a047b904c1fa43ee9165d462fd7a6e70ef"
+trusted_hash = "sha256:7954d675ef3bafd5e5a6073ae51d7de57a08f21340f241c332f99078e955675d"
 
 [hooks.state."ponytail@ponytail:hooks/claude-codex-hooks.json:user_prompt_submit:0:0"]
-trusted_hash = "sha256:6a6f42bc3b58d6262db38bfd74d7f340fcca2b09cdb134aad365063f0bfefca4"
+trusted_hash = "sha256:8c9efc5a5e649c8cdca3f0b7bf4cba81d9717d1bc930c7dbc18b6efd66c7c58c"
 
 [hooks.state."context-mode@context-mode:.codex-plugin/hooks.json:post_tool_use:0:0"]
 trusted_hash = "sha256:0d237345f8d46110d36cd0ef08e79b55fa151a07691dee36d492aa6f64bc0efd"

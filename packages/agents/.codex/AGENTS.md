@@ -23,67 +23,44 @@
 
 ## Tool preferences
 
-For web research:
+### Web research
 
-- When external web research is needed, actively choose between native web
-  search and `@Exa` instead of defaulting mechanically to native web search.
-- Prefer `@Exa` for technical research, especially for:
-  - current library, framework, API, or SDK documentation;
-  - GitHub repositories, issues, pull requests, discussions, and changelogs;
-  - real-world implementation examples and architecture patterns;
-  - undocumented or poorly documented behavior;
-  - errors, compatibility issues, migrations, and upgrade paths;
-  - niche or hard-to-find technical sources;
-  - research requiring multiple searches, source synthesis, or cross-checking.
-- Prefer native web search for simple factual lookups, straightforward news or
-  current-event checks, locating a known official page, and quick searches where
-  deeper source discovery would not add meaningful value.
-- When using `@Exa`, write descriptive semantic queries that describe the
-  desired source or evidence rather than short keyword queries.
-- With `@Exa`, prefer primary sources such as official documentation, source
-  repositories, issues, changelogs, specifications, papers, and original
-  announcements.
-- For non-trivial research, use multiple focused `@Exa` searches when useful,
-  then read the most relevant sources instead of relying only on search
-  snippets.
-- For difficult technical research, prefer `@Exa` over native web search unless
-  there is a clear reason not to.
+- Prefer `@Exa` for technical or in-depth research: documentation, source
+  repositories, implementation examples, undocumented behavior, debugging,
+  compatibility, upgrades, and questions requiring cross-checking sources.
+- Prefer native web search for simple facts, news, or locating a known
+  official page.
+- With `@Exa`, describe the source or evidence sought in a semantic query.
+  Use multiple focused searches when the question has distinct parts.
+- Prefer primary sources. Read the relevant pages before drawing conclusions;
+  search snippets alone are insufficient for non-trivial research.
 
-For web QA:
+### Web QA
 
-- For any task that requires a manipulation for browsing, use `@Browser` by
-  default.
-- Do not use Playwright, Puppeteer, Selenium, or browser automation scripts
-  unless I explicitly ask for them.
-- If `@Browser` is not enough, explain why before using another tool.
-- Do not use `@Browser` just for documentation or simple task, it's just
-  required for frontend task
+- Use `@Browser` for interaction with a running frontend and validation of its
+  appearance or user flows. Use research tools for documentation and lookups.
+- If `@Browser` cannot perform a required action, explain the specific
+  limitation before using another tool.
+- Use Playwright, Puppeteer, Selenium, or browser automation scripts only when
+  I explicitly request them.
 
-For mobile QA:
+### React Native QA
 
-- For any task that requires interacting with, testing, or validating a React
-  Native app on a mobile device or simulator, use `agent-device` by default.
-- Before performing any mobile QA interaction, first make sure the correct
-  simulator/device is already running, available, and the app is launched or
-  launchable through `agent-device`.
-- Do not use Browser/Browser Use, Appium, Detox, Maestro, XCUITest, Espresso,
-  direct Xcode UI manipulation, `simctl` navigation, shell commands, or custom
-  automation scripts to interact with the app unless I explicitly ask for them.
-- Do not try alternative navigation methods or launch unnecessary
-  Xcode/simulator commands before checking whether `agent-device` can perform
-  the task on the already-running simulator.
-- If the simulator is not running, start or select the appropriate simulator
-  using the minimum necessary action, then continue the QA flow with
-  `agent-device`.
-- If `agent-device` cannot perform a required action, explain exactly what is
-  missing or unsupported before falling back to another tool.
-- Do not use `agent-device` for documentation, static code review, or
-  implementation tasks that do not require interacting with the running app.
-- For React Native frontend QA, `agent-device` should be the source of truth for
-  navigation, taps, text input, screenshots, visual validation, user-flow
-  testing, bug reproduction, and fix verification.
+- Use `agent-device` for interaction with a running app. Its navigation,
+  inputs, screenshots, and observed behavior are the source of truth for
+  visual validation, user-flow testing, bug reproduction, and fix verification.
+- First check through `agent-device` that the intended device or simulator is
+  available and the app is running or launchable. Reuse the running simulator;
+  if needed, start or select the intended simulator with the minimum action,
+  then continue through `agent-device`.
+- If `agent-device` cannot perform a required action, explain the specific
+  limitation. Use another interaction method only when I explicitly request it.
+  This includes browser tools, Appium, Detox, Maestro, XCUITest, Espresso,
+  Xcode UI, `simctl` navigation, shell commands, and custom automation scripts.
+- Use code and research tools for implementation, static review, and
+  documentation that require no interaction with the running app.
 
-## Astra orchestrator
+## Orchestrator
 
 For complex coding tasks, use the `orchestrate` skill when its trigger
 conditions match.
@@ -93,6 +70,24 @@ verification. Prefer specialized subagents for bounded exploration,
 implementation, testing, review, and technical research.
 
 Do not delegate trivial work merely for parallelism. Do not let multiple
-implementation agents edit the same files without explicit ownership
-boundaries. User instructions always take precedence over this orchestration
-policy.
+implementation agents edit the same files without explicit ownership boundaries.
+User instructions always take precedence over this orchestration policy.
+
+## Output style
+
+The reader has ADHD. Shape every response so it can be acted on:
+
+1. Lead with the answer or next action: command, path, or snippet first.
+2. Number multi-step work; one bounded action per step.
+3. End with one next action doable in under two minutes.
+4. Finish the current issue before raising a new one.
+5. Restate progress each turn ("step 3 of 5 done").
+6. Give time estimates in concrete units, never "a bit".
+7. After a change, show what now works.
+8. Errors: state location, cause, and fix. No drama.
+9. Cap lists to 5 items.
+10. No preamble, no recaps, no closers.
+
+Exceptions: explain fully when asked to explain. Confirm before destructive
+actions. After three failed fixes, stop and name the doubtful assumption. If the
+request is ambiguous, ask one short question.

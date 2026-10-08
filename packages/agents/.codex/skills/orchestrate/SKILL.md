@@ -3,7 +3,7 @@ name: orchestrate
 description:
   Orchestrate complex Codex coding work with the root agent as
   planner/integrator, Luna subagents for exploration, implementation, testing,
-  and research, and an Astra reviewer. Use for multi-file features, debugging
+  and research, and a Sol reviewer. Use for multi-file features, debugging
   across components, repo-wide changes, parallelizable workstreams, or whenever
   the user asks to delegate or use subagents. Do not use for trivial one-file
   edits or simple questions.
@@ -22,18 +22,18 @@ integrate, verify, and present the final result.
 
 The expected default topology is:
 
-- root: GPT-5.6 Luna at max reasoning
-- explorer: GPT-5.6 Luna
-- worker: GPT-5.6 Luna
-- tester: GPT-5.6 Luna
-- researcher: GPT-5.6 Luna
-- reviewer: GPT-6 Astra
+- root: GPT-6 Luna at max reasoning
+- explorer: GPT-6 Luna
+- worker: GPT-6 Luna
+- tester: GPT-6 Luna
+- researcher: GPT-6 Luna
+- reviewer: GPT-6.1 Sol
 
 Use Luna for all routine subagent execution.
 
 This is a requirement, not a preference.
 
-Only the reviewer uses Astra by default, and only when an independent review
+Only the reviewer uses Sol by default, and only when an independent review
 materially improves confidence.
 
 Do not override a Luna subagent to a more expensive model unless the user
@@ -111,13 +111,13 @@ The root must not offload architectural ownership to a subagent.
 
 When spawning agents, use these models by default:
 
-- explorer: `gpt-5.6-luna`
-- worker: `gpt-5.6-luna`
-- tester: `gpt-5.6-luna`
-- researcher: `gpt-5.6-luna`
-- reviewer: `gpt-6-astra`
+- explorer: `gpt-6-luna`
+- worker: `gpt-6-luna`
+- tester: `gpt-6-luna`
+- researcher: `gpt-6-luna`
+- reviewer: `gpt-6.1-sol`
 
-The root keeps the model configured in `config.toml`: `gpt-5.6-luna` at max
+The root keeps the model configured in `config.toml`: `gpt-6-luna` at max
 reasoning. Do not change the root model from within a session.
 
 For every delegated task:
@@ -131,12 +131,12 @@ For every delegated task:
 
 Do not silently substitute the root agent for a required Luna worker.
 
-Do not spawn Astra workers except for the `reviewer` role unless:
+Do not spawn Sol workers except for the `reviewer` role unless:
 
-- the user explicitly requests Astra
+- the user explicitly requests Sol
 - Luna reports a genuinely difficult reasoning blocker
 - the root determines that a high-risk architectural or security review needs
-  Astra
+  Sol
 
 Routine execution should remain on Luna.
 
@@ -278,7 +278,7 @@ For non-trivial implementation tasks, prefer this sequence:
 5. wait for implementation
 6. spawn Luna tester
 7. wait for validation
-8. spawn Astra reviewer when an independent review is materially useful
+8. spawn Sol reviewer when an independent review is materially useful
 9. resolve material findings
 10. run final verification
 11. present the result
@@ -302,7 +302,7 @@ For cross-component bugs:
 4. root determines the likely root cause
 5. assign a bounded Luna worker to implement the fix
 6. assign Luna tester to reproduce the original failure and validate the fix
-7. use Astra reviewer for high-risk or non-obvious fixes
+7. use Sol reviewer for high-risk or non-obvious fixes
 
 Do not let multiple workers independently attempt competing fixes unless the
 root intentionally requests alternative approaches.
@@ -452,4 +452,4 @@ If the user explicitly asks to see delegation, report:
 - completion status
 
 Do not claim a Luna agent was used unless the trace contains a successful
-`spawn_agent` call using `gpt-5.6-luna`.
+`spawn_agent` call using `gpt-6-luna`.
