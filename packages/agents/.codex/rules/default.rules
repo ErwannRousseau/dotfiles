@@ -33,3 +33,5 @@ prefix_rule(
     decision = "forbidden",
     justification = "RTK proxy SFTP commands are forbidden.",
 )
+prefix_rule(pattern=["rtk", "gh", "api", "--method", "DELETE", "repos/ErwannRousseau/portfolio/branches/develop/protection/enforce_admins"], decision="allow")
+prefix_rule(pattern=["rtk", "gh"], decision="allow")

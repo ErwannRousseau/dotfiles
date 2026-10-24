@@ -1,6 +1,6 @@
 model_context_window = 272000
 model_auto_compact_token_limit = 200000
-model = "gpt-6.1-sol"
+model = "gpt-6-luna"
 personality = "pragmatic"
 approval_policy = "never"
 approvals_reviewer = "user"
@@ -185,8 +185,8 @@ BROWSER_USE_TINYSKY_ENABLED = "1"
 NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = ""
 NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = ""
 BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
-BROWSER_USE_CODEX_APP_VERSION = "26.1016.51333"
-NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/r2/.codex/plugins/cache/openai-bundled/browser/26.1016.51333/scripts/browser-service.mjs"}'
+BROWSER_USE_CODEX_APP_VERSION = "26.1021.31345"
+NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/r2/.codex/plugins/cache/openai-bundled/browser/26.1021.31345/scripts/browser-service.mjs"}'
 CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex"
 
 [mcp_servers.playwright]
@@ -274,9 +274,6 @@ enabled = true
 [plugins."i-have-adhd@i-have-adhd"]
 enabled = true
 
-[plugins."code-review@openai-bundled"]
-enabled = true
-
 [shell_environment_policy.set]
 NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "9230e2bd8b24b7ac7a0ba6774c64bf0d78ecdabbdd91d0ed627b02a587bae2df"
 
@@ -335,6 +332,9 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [projects."/Users/r2/KNP/MYPacome"]
+trust_level = "trusted"
+
+[projects."/Users/r2/Developer/github/nutritual"]
 trust_level = "trusted"
 
 [apps.asdk_app_69a1d78e929881919bba0dbda1f6436d]
